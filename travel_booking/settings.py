@@ -21,10 +21,7 @@ DEBUG = env("DEBUG")
 SECRET_KEY = env("SECRET_KEY")
 
 # ✅ ALLOWED_HOSTS fix: add Render domain and keep .env support
-ALLOWED_HOSTS = env.list(
-    "ALLOWED_HOSTS",
-    default=["127.0.0.1", "localhost", "travel-booking-app-570s.onrender.com"]
-)
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "travel-booking-app-570s.onrender.com"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
