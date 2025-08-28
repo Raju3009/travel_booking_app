@@ -12,7 +12,6 @@ env = environ.Env(
     DB_PASSWORD=(str, ""),
     DB_HOST=(str, ""),
     DB_PORT=(str, ""),
-    ALLOWED_HOSTS=(list, ["127.0.0.1","localhost"]),
 )
 
 # Read .env if present
@@ -20,7 +19,12 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 DEBUG = env("DEBUG")
 SECRET_KEY = env("SECRET_KEY")
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
+
+# ✅ ALLOWED_HOSTS fix: add Render domain and keep .env support
+ALLOWED_HOSTS = env.list(
+    "ALLOWED_HOSTS",
+    default=["127.0.0.1", "localhost", "travel-booking-app-570s.onrender.com"]
+)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
