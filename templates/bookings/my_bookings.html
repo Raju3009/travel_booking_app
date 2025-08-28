@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="h4 mb-3">My Bookings</h1>
+
+<div class="table-responsive">
+<table class="table table-striped align-middle">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Travel</th>
+      <th>Seats</th>
+      <th>Total</th>
+      <th>Status</th>
+      <th>Booked At</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for b in bookings %}
+    <tr>
+      <td>{{ b.id }}</td>
+      <td>{{ b.travel_option.type }} {{ b.travel_option.source }} → {{ b.travel_option.destination }} ({{ b.travel_option.date_time }})</td>
+      <td>{{ b.num_seats }}</td>
+      <td>₹{{ b.total_price }}</td>
+      <td>
+        {% if b.status == "Cancelled" %}
+          <span class="badge text-bg-secondary">Cancelled</span>
+        {% else %}
+          <span class="badge text-bg-success">Confirmed</span>
+        {% endif %}
+      </td>
+      <td>{{ b.booking_date }}</td>
+      <td class="text-end">
+        {% if b.status != "Cancelled" %}
+        <a class="btn btn-sm btn-outline-danger" href="{% url 'cancel_booking' b.id %}">Cancel</a>
+        {% endif %}
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="7" class="text-center">No bookings yet.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

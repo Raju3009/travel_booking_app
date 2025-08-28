@@ -1,0 +1,12 @@
+body {
+  background: url("/static/img/bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+main.container {
+  background: rgba(255, 255, 255, 0.9); /* white overlay */
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}

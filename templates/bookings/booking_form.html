@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-7 col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h1 class="h5 mb-2">{{ travel.type }}: {{ travel.source }} → {{ travel.destination }}</h1>
+        <p class="mb-1"><strong>Date/Time:</strong> {{ travel.date_time }}</p>
+        <p class="mb-1"><strong>Price per seat:</strong> ₹{{ travel.price }}</p>
+        <p class="mb-3"><strong>Available seats:</strong> {{ travel.available_seats }}</p>
+
+        <form method="post" action="{% url 'book_travel' travel.id %}">
+          {% csrf_token %}
+          {{ form.as_p }}
+          {% if user.is_authenticated %}
+            <button class="btn btn-success">Confirm Booking</button>
+          {% else %}
+            <a href="/accounts/login/?next={% url 'travel_detail' travel.id %}" class="btn btn-primary">Login to Book</a>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
